@@ -40,6 +40,18 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
+test.each([
+  ['get', '/user/passkeys'],
+  ['delete', '/user/passkeys/11111111-1111-1111-1111-111111111111'],
+  ['post', '/user/passkeys/register/options'],
+  ['post', '/user/passkeys/register'],
+  ['post', '/user/passkeys/login/options'],
+  ['post', '/user/passkeys/login'],
+])('retired passkey route %s %s returns 404', async (method, path) => {
+  await request(app)[method](path).expect(404);
+  expect(supabase.from).not.toHaveBeenCalled();
+});
+
 describe('POST /user/sync', () => {
   test('no email -> 400', async () => {
     const res = await request(app).post('/user/sync').send({});
