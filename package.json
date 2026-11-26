@@ -10,7 +10,6 @@
     "test:smoke": "node tests/smoke.js"
   },
   "dependencies": {
-    "@simplewebauthn/server": "^11.0.0",
     "@supabase/supabase-js": "^2.100.0",
     "compression": "^1.8.2",
     "cors": "^2.8.5",
